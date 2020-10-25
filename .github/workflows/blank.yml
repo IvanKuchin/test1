@@ -39,4 +39,4 @@ jobs:
         with:
           body: my first message
           path: 1111111
-          position: 3
+          position: 4
