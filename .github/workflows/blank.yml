@@ -30,6 +30,7 @@ jobs:
           echo Add other actions to build,
           echo test, and deploy your project.
           echo ${{ github }}
-          echo ${{ github.event }}
-          echo ${{ github.event.deployment.id }}
+          echo ${{ github.event.number }}
+          echo ${{ github.event.issue.number }}
+
 
