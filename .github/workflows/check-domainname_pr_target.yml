@@ -6,15 +6,35 @@ jobs:
     name: Find substring job
     runs-on: ubuntu-latest
     steps:
+      - name: start deployment
+        uses: bobheadxi/deployments@v0.4.3
+        id: deployment
+        with:
+          step: start
+          token: ${{ secrets.GITHUB_TOKEN }}
+          env: staging
+
       - name: Checkout Code
         uses: actions/checkout@v2
         with:
           ref: "refs/pull/${{ github.event.number }}/merge"
+
       - name: Run bash script
         shell: bash
         run: sh -c .github/actions/find-substring/find-substring.sh
+
       - name: Create Commit Comment, if fail
         if: ${{ failure() }}
         uses: peter-evans/commit-comment@v1
         with:
           body: Domain name should not be used in the source code
+
+      - name: update deployment status
+        uses: bobheadxi/deployments@v0.4.3
+        if: always()
+        with:
+          step: finish
+          token: ${{ secrets.GITHUB_TOKEN }}
+          status: ${{ job.status }}
+          deployment_id: ${{ steps.deployment.outputs.deployment_id }}
+          
