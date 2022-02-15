@@ -29,7 +29,7 @@ jobs:
         run: |
           echo Add other actions to build,
           echo test, and deploy your project.
-          echo ${{ github }}
+          echo '${{ toJSON(github) }}'
           echo PR#: ${{ github.event.number }}
           echo issue#: ${{ github.event.issue.number }}
           
@@ -38,7 +38,8 @@ jobs:
           curl \
             -X POST \
             -H "Accept: application/vnd.github.v3+json" \
-            https://api.github.com/repos/${{ github.repository }}/issues/${{ github.event.issue.number }}/comments \
+            -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+            https://api.github.com/repos/${{ github.repository }}/issues/${{ github.event.number }}/comments \
             -d '{"body":"this comment must appear in issue"}'
 
 
