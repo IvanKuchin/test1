@@ -7,16 +7,17 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: start deployment
-        uses: bobheadxi/deployments@v0.4.3
+        uses: bobheadxi/deployments@master
         id: deployment
         with:
           step: start
           token: ${{ secrets.GITHUB_TOKEN }}
           env: staging
           deployment_id: ${{ github.event.deployment.id }}
+          # ref: "refs/pull/${{ github.event.number }}/merge"
           desc: "depl_id: ${{ github.event.deployment.id }}, ref_id: ${{ github.head_ref }}"
           log_args: true
-
+          
       - name: Checkout Code
         uses: actions/checkout@v2
         with:
