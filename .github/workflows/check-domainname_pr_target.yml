@@ -13,7 +13,7 @@ jobs:
           step: start
           token: ${{ secrets.GITHUB_TOKEN }}
           env: staging
-          deployment_id: ${{ github.event.deployment.id }}
+          # deployment_id: ${{ github.event.deployment.id }}
           desc: "depl_id: ${{ github.event.deployment.id }}, ref_id: ${{ github.head_ref }}"
           log_args: true
 
