@@ -14,6 +14,7 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           env: staging
           # deployment_id: ${{ github.event.deployment.id }}
+          ref: "refs/pull/${{ github.event.number }}/merge"
           desc: "depl_id: ${{ github.event.deployment.id }}, ref_id: ${{ github.head_ref }}"
           log_args: true
 
