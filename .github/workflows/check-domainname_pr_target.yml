@@ -13,6 +13,7 @@ jobs:
           step: start
           token: ${{ secrets.GITHUB_TOKEN }}
           env: staging
+          deployment_id: ${{ github.event.deployment.id }}
 
       - name: Checkout Code
         uses: actions/checkout@v2
